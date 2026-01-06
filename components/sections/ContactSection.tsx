@@ -1,9 +1,10 @@
+'use client';
+
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   Mail,
   Phone,
-  Globe,
   MapPin,
   Navigation,
   Instagram,
@@ -13,19 +14,26 @@ import {
 } from "lucide-react";
 import ContactCard from "@/components/shared/ContactCard";
 
-/* Animation Variants */
-const fadeUp = {
+/* =========================
+   ANIMATION VARIANTS (FIXED)
+   ========================= */
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1], // ✅ easeOut equivalent
+    },
   },
 };
 
-const stagger = {
+const stagger: Variants = {
   visible: {
-    transition: { staggerChildren: 0.15 },
+    transition: {
+      staggerChildren: 0.15,
+    },
   },
 };
 
@@ -97,16 +105,6 @@ export default function ContactSection() {
               />
             </motion.div>
 
-            <motion.div variants={fadeUp}>
-              <ContactCard
-                icon={<Globe className="w-6 h-6" />}
-                label="Website"
-                value="www.erootstechnologies.com"
-                href="https://www.erootstechnologies.com"
-                type="external"
-              />
-            </motion.div>
-
             {/* Address */}
             <motion.div
               variants={fadeUp}
@@ -130,7 +128,7 @@ export default function ContactSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right – Google Maps */}
+          {/* Right – Map */}
           <motion.div
             variants={fadeUp}
             className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl"
@@ -142,12 +140,11 @@ export default function ContactSection() {
               loading="lazy"
             />
 
-            {/* Overlay Button */}
             <a
               href="https://maps.google.com/?q=Kinfra+Techno+Industrial+Park+Kakkancheri"
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute bottom-6 right-6 bg-[#38e07b] hover:bg-[#38e07b]/90 text-[#122017] font-bold py-3 px-6 rounded-full flex items-center gap-2"
+              className="absolute bottom-6 right-6 bg-[#38e07b] text-[#122017] font-bold py-3 px-6 rounded-full flex items-center gap-2"
             >
               <Navigation className="w-5 h-5" />
               Get Directions
@@ -167,14 +164,11 @@ export default function ContactSection() {
           <div className="flex gap-4">
             <FooterSocialIcon
               icon={<Instagram size={20} />}
-              href="https://www.instagram.com/erootstechnologies?igsh=MnJ6cHFuYjQ0ZWs"
+              href="https://www.instagram.com/erootstechnologies"
             />
             <FooterSocialIcon icon={<Linkedin size={20} />} href="#" />
             <FooterSocialIcon icon={<Twitter size={20} />} href="#" />
-            <FooterSocialIcon
-              icon={<Facebook size={20} />}
-              href="https://www.facebook.com/share/19aUoUSfVF/"
-            />
+            <FooterSocialIcon icon={<Facebook size={20} />} href="#" />
           </div>
         </motion.footer>
       </motion.div>
